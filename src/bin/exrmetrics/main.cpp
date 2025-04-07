@@ -529,7 +529,7 @@ main (int argc, char** argv)
                             std::string cmp_name;
                             getCompressionNameFromId(compression, cmp_name);
                             cmp_name += ".";                            
-                            filename_cmp.insert(filename_cmp.size() - 4, cmp_name);
+                            filename_cmp.insert(filename_cmp.size() - 3, cmp_name);
                         }
                         
                         cout << "Writing file " << filename_cmp << endl;
