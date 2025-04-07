@@ -50,7 +50,7 @@ usageMessage (ostream& stream, const char* program_name, bool verbose = false)
         std::string compressionNames;
         getCompressionNamesString ("/", compressionNames);
         stream
-            << "Read an OpenEXR image from infile, write an identical copy to outfile"
+            << "Read an OpenEXR image from infile, write to outfile with different compression."
                " reporting time taken to read/write and file sizes.\n"
                "\n"
                "Options:\n"
@@ -522,9 +522,20 @@ main (int argc, char** argv)
                         d.file        = inFile;
                         d.compression = compression;
                         d.mode        = mode;
+                        std::string  filename_cmp;
+                        if (opts.outFile)
+                        {
+                            filename_cmp = opts.outFile;
+                            std::string cmp_name;
+                            getCompressionNameFromId(compression, cmp_name);
+                            cmp_name += ".";                            
+                            filename_cmp.insert(filename_cmp.size() - 4, cmp_name);
+                        }
+                        
+                        cout << "Writing file " << filename_cmp << endl;
                         d.metrics     = exrmetrics (
                             inFile,
-                            opts.outFile,
+                            filename_cmp.c_str(),
                             opts.part,
                             compression,
                             opts.level,
@@ -535,6 +546,7 @@ main (int argc, char** argv)
                             mode,
                             opts.verbose);
                         data.push_back (d);
+                        cout << "File " << filename_cmp << " is complete and data collected." << endl;
                     }
                 }
             }
