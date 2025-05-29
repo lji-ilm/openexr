@@ -532,7 +532,7 @@ main (int argc, char** argv)
                             filename_cmp.insert(filename_cmp.size() - 3, cmp_name);
                         }
                         
-                        cout << "Writing file " << filename_cmp << endl;
+                        // cout << "Writing file " << filename_cmp << endl;
                         d.metrics     = exrmetrics (
                             inFile,
                             filename_cmp.c_str(),
@@ -546,7 +546,7 @@ main (int argc, char** argv)
                             mode,
                             opts.verbose);
                         data.push_back (d);
-                        cout << "File " << filename_cmp << " is complete and data collected." << endl;
+                        // cout << "File " << filename_cmp << " is complete and data collected." << endl;
                     }
                 }
             }
